@@ -1,0 +1,6 @@
+Add-Type -AssemblyName System.Windows.Forms
+while($true)
+{
+[Windows.Forms.Cursor]::Position = "34,34"
+[Windows.Forms.Cursor]::Position = "1,1"
+}
