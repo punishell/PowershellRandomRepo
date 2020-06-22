@@ -1,6 +1,25 @@
-$port=12345
-$remoteHost = "1.2.3.4"
-$message= 0x40,0x00
+function fnHex2Ascii()
+{
+  param (
+    [string]$HexString
+  )
+  
+  Clear-Variable -Name sAscii -ErrorAction SilentlyContinue
+  $HexString -Split '(.{2})' | %{ if ($_ -ne "") { $sAscii+=[CHAR]([CONVERT]::toint16($_,16)) } }
+
+  # Return metadata and body...
+  return $sAscii 
+}
+
+
+$lol = '656c6b6c6f'
+
+
+
+$port=8080
+$remoteHost = "127.0.0.1"
+$message= fnHex2Ascii($lol)
+
 $socket = new-object System.Net.Sockets.TcpClient($remoteHost, $port)
 $data = [System.Text.Encoding]::ASCII.GetBytes($message)
 $stream = $socket.GetStream()
