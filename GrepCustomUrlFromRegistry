@@ -1,3 +1,4 @@
 New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT
 $REGPATH = "HKCR:\"
-Get-ChildItem "$REGPATH" | Where-Object {$_.Property -Match "^(default)    : URL:.*"}
+Get-ChildItem "$REGPATH" >> temp.txt
+Select-String -Path .\tmp.txt -Pattern 'URL:'
